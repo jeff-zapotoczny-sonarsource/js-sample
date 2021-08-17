@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const sanitize = require("sanitize-html");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -12,8 +13,7 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.post("/api/world", (req, res) => {
-  console.log(req.body);
-  res.send("You sent:" + req.body.post);
+  res.send("You sent:" + sanitize(req.body.post));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
